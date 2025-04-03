@@ -1,4 +1,4 @@
-import instanceAxios from "../utils/instanceAxios"
+import instanceAxios from "../utils/instanceAxios";
 
 const fetchAttributes = async () => {
     try {
@@ -9,7 +9,17 @@ const fetchAttributes = async () => {
     }
 }
 
+const createAttribute = async (payload: { name: string }) => {
+    try {
+        const { data } = await instanceAxios.post("/attributes",payload);
+        return data.data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export const AttributeServices = {
-    fetchAttributes
+    fetchAttributes,
+    createAttribute
 }
 
