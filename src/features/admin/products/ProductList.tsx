@@ -3,6 +3,8 @@ import { ProductServices } from "../../../services/Product";
 import { Button, Table } from "antd";
 import { EyeOutlined } from "@ant-design/icons";
 import { IProduct } from "../../../types/Product";
+import  formatVND  from "../../../utils/formatVND";
+import { PenIcon } from "lucide-react";
 
 const ProductList = () => {
   const { data: products, isLoading } = useQuery({
@@ -13,8 +15,8 @@ const ProductList = () => {
   const columns = [
     {
       title: "ID",
-      dataIndex: "id",
-      key: "id",
+      dataIndex: "_id",
+      key: "_id",
     },
     {
       title: "Name",
@@ -22,14 +24,19 @@ const ProductList = () => {
       key: "name",
     },
     {
-      title: "Sell_price",
-      dataIndex: "sell_price",
-      key: "sell_price",
+      title: "BasePrice",
+      dataIndex: "basePrice",
+      key: "basePrice",
+      render: (value: number) => (
+        <>
+        <span>{formatVND(value)} VND</span>
+        </>
+      )
     },
     {
-      title: "Stock",
-      dataIndex: "stock",
-      key: "stock",
+      title: "Category",
+      dataIndex: "category",
+      key: "category",
     },
     {
       title: "Image",
@@ -57,7 +64,7 @@ const ProductList = () => {
         console.log(record);
         return (
           <>
-            <Button type="primary">Update</Button>
+            <Button type="primary" ><PenIcon style={{ width: "14px", height: "14px" }} /></Button>
             <Button color="orange" variant="solid">
               <EyeOutlined />
             </Button>
@@ -68,6 +75,7 @@ const ProductList = () => {
   ];
   return (
     <>
+      {/* <Button type="primary" onClick={handleAddProduct} style={{ marginBottom: 16 }}>Thêm sản phẩm</Button> */}
       <Table dataSource={products} columns={columns} loading={isLoading} />
     </>
   );

@@ -1,20 +1,20 @@
+import { IBaseResponse } from "./base";
+
 export interface IProduct {
-    id: number;
+    _id: string;
     name: string;
     description: string;
-    sell_price: number;
-    buy_price: number;
-    stock: number;
-    status: boolean;
+    category: string;
+    basePrice: number;
     image: string;
-    variants: IVariant[];
+    hasVariants: boolean;
+    createdAt: string;
+    updatedAt: string;
+    status: boolean;
 }
 
-export interface IVariant {
-    key: IVariantKey[];
+
+export interface IProductResponse extends IBaseResponse {
+    data: IProduct[];
 }
 
-export interface IVariantKey {
-    id: number;
-    value: string;
-}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   MenuFoldOutlined,
   MenuOutlined,
@@ -6,9 +6,11 @@ import {
   ProductFilled,
   ProductOutlined,
   UserOutlined,
-} from '@ant-design/icons';
-import { Button, Layout, Menu } from 'antd';
-import { NavLink, Outlet } from 'react-router';
+} from "@ant-design/icons";
+import { Button, Layout, Menu } from "antd";
+import { NavLink, Outlet } from "react-router";
+import { BookCheck } from "lucide-react";
+import { Toaster } from "react-hot-toast";
 
 const { Header, Sider, Content } = Layout;
 
@@ -16,36 +18,45 @@ const AdminLayout: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const items = [
     {
-      key: '1',
+      key: "1",
       icon: <MenuOutlined />,
       label: <NavLink to="/admin/dashboard">Dashboard</NavLink>,
     },
     {
-      key: '2',
+      key: "2",
       icon: <ProductOutlined />,
       label: <NavLink to="/admin/products">Product</NavLink>,
     },
     {
-      key: '3',
+      key: "3",
       icon: <ProductFilled />,
       label: <NavLink to="/admin/variants">Product Variants</NavLink>,
     },
     {
-      key: '4',
+      key: "4",
       icon: <UserOutlined />,
-      label:<NavLink to="/admin/users">Users</NavLink>,
+      label: <NavLink to="/admin/users">Users</NavLink>,
     },
-  ]
-
+    {
+      key: "5",
+      icon: <UserOutlined />,
+      label: <NavLink to="/admin/attribute">Attribute</NavLink>,
+    },
+    {
+      key: "6",
+      icon: <BookCheck style={{ width: 14, height: 14 }} />,
+      label: <NavLink to="/admin/attribute-value">Attribute Value</NavLink>,
+    },
+  ];
 
   return (
-    <Layout style={{minHeight: '100vh'}}>
+    <Layout style={{ minHeight: "100vh" }}>
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="demo-logo-vertical" />
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={['1']}
+          defaultSelectedKeys={["1"]}
           items={items}
         />
       </Sider>
@@ -56,7 +67,7 @@ const AdminLayout: React.FC = () => {
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             onClick={() => setCollapsed(!collapsed)}
             style={{
-              fontSize: '16px',
+              fontSize: "16px",
               width: 64,
               height: 64,
             }}
@@ -64,16 +75,17 @@ const AdminLayout: React.FC = () => {
         </Header>
         <Content
           style={{
-            margin: '24px 16px',
+            margin: "24px 16px",
             padding: 24,
             minHeight: 280,
             background: "#fff",
             borderRadius: 3,
           }}
         >
-          <Outlet/>
+          <Outlet />
         </Content>
       </Layout>
+      <Toaster />
     </Layout>
   );
 };
